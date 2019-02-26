@@ -59,7 +59,7 @@ kubectl get pods --namespace=jenkins
 
 
 
-kubectl logs jenkins-deployment-2539456353-j00w5 --namespace=jenkins
+kubectl logs jenkins-deployment-..... --namespace=jenkins
 
 
 The password can be found at the end of the log as shown below.

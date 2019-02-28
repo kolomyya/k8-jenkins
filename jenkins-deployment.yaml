@@ -12,8 +12,15 @@ spec:
       labels:
         app: jenkins
     spec:
+      volumes:
+        - name: jenkins-pv
+        persistentVolumeClaim:
+        claimName: jenkins-pv-claim      
       containers:
-      - name: jenkins
-        image: jenkins:2.60.3
+        - name: jenkins
+        image: jenkins/jenkins
         ports:
         - containerPort: 8080
+        volumeMounts: 
+          - mountPath: /var/jenkins_home
+            name: jenkins-pv 

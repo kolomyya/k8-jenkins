@@ -1,14 +1,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: jenkins-pv
+  name: jenkins-volume
   labels:
-    app: jenkins
+    app: jenkins-pod
 spec:
-  storageClassName: manual
   capacity:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/var/jenkins-data"
+    path: "/home/jenkins-app/volume"

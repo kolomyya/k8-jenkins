@@ -1,26 +1,36 @@
-apiVersion: extensions/v1beta1 # for versions before 1.7.0 use apps/v1beta1
+apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: jenkins-deployment
+  name: jenkins-pod
+  namespace: jenkins
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jenkins
+      app: jenkins-pod
+      name: jenkins-pod
   template:
     metadata:
       labels:
-        app: jenkins
+        app: jenkins-pod
+        name: jenkins-pod
     spec:
-      volumes:
-        - name: jenkins-pv
-        persistentVolumeClaim:
-        claimName: jenkins-pv-claim      
       containers:
-        - name: jenkins
-        image: jenkins/jenkins
+      - name: jenkins-pod
+        imagePullPolicy: Always
+        image: kolomyya/jenkins:v1
         ports:
         - containerPort: 8080
+        - containerPort: 50000
         volumeMounts: 
+          - mountPath: /var/run
+            name: docker-sock 
           - mountPath: /var/jenkins_home
-            name: jenkins-pv 
+            name: jenkins-home
+      volumes: 
+        - name: docker-sock
+          hostPath: 
+            path: /var/run
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pv-claim

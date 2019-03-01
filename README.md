@@ -46,7 +46,7 @@ kubectl  describe deployments --namespace=jenkins
 kubectl create -f jenkins-service.yaml --namespace=jenkins
 
 
-Now if you browse to any one of the Node IP on port 30000, you will be able to access the Jenkins dashboard.
+Now if you browse to any one of the Node IP on port 31111, you will be able to access the Jenkins dashboard.
 
 
  7.Jenkins will ask for initial Admin password. You can get that from the pod logs either from kubernetes dashboard or  CLI. You can get the pod details using the following CLI command.
